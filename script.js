@@ -6,6 +6,9 @@ const columns = 4;
 
 window.onload = () => {
     setGame();
+    const gameboard = document.getElementById('gameboard');
+    gameboard.addEventListener("touchstart", handleTouchStart);
+    gameboard.addEventListener("touchend", handleTouchEnd);
 }
 
 const setGame = () => {
@@ -28,6 +31,43 @@ const setGame = () => {
     setTwo();
     setTwo();
     document.getElementById('highscore').innerText = highscore; // Initialize highscore display
+}
+
+const handleTouchStart = (event) => {
+    startX = event.touches[0].clientX;
+    startY = event.touches[0].clientY;
+}
+
+const handleTouchEnd = (event) => {
+    endX = event.changedTouches[0].clientX;
+    endY = event.changedTouches[0].clientY;
+
+    handleSwipe();
+}
+
+const handleSwipe = () => {
+    let diffX = endX - startX;
+    let diffY = endY - startY;
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 0) {
+            slideRight();
+        } else {
+            slideLeft();
+        }
+    } else {
+        // Vertical swipe
+        if (diffY > 0) {
+            slideDown();
+        } else {
+            slideUp();
+        }
+    }
+
+    setTwo();
+    document.getElementById("score").innerText = score;
+    checkGameOver();
 }
 
 const updateTile = (tile, num) => {
