@@ -1,0 +1,13 @@
+.container {
+    text-align: center;
+}
+
+.gameboard {
+    background: #cdc1b5;
+    height: 400px;
+    width: 400px;
+    border: 6px #bbada0 solid;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
